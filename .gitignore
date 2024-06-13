@@ -1,0 +1,18 @@
+# Ignore executable files
+*.exe
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore node_modules directory
+node_modules/
+
+# Ignore log files
+*.log
+
+# Ignore compiled Python files
+*.pyc
+
+# Ignore visual studio code 
+.vscode
+
