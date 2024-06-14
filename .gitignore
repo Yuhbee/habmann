@@ -1,5 +1,6 @@
 # Ignore executable files
 *.exe
+a.out
 
 # Ignore macOS system files
 .DS_Store
