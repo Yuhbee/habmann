@@ -281,7 +281,7 @@ class Quader extends Form3D {
 }
 
 // Hauptklasse zum Testen der Funktionen
-public class u19_v2 {
+public class u29_v2 {
     public static void main(String[] args) {
         // Test der 2D-Formen
         Kreis kreis = new Kreis("Rot", true, 5.0);
