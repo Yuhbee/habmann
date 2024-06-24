@@ -1,8 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class u28_v2 {
-    public static void main(String[] args) {
+public class u28_v2 
+{
+    public static void main(String[] args)
+    {
         // Bildschirm loeschen
         clearScreen();
 
@@ -34,25 +36,20 @@ public class u28_v2 {
         zeigeKonten(List.of(k3)); // zeigt einzelne Kontoinformationen
     }
 
-    public static void clearScreen() {
-        try {
-            if (System.getProperty("os.name").contains("Windows")) {
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            } else {
-                System.out.print("\033[H\033[2J");  // Sogenannte ESCAPE-Sequenz!
-                System.out.flush();
-            }
-        } catch (Exception e) {
-            System.out.println("Fehler beim Löschen des Bildschirms.");
-        }
+    public static void clearScreen() 
+    {
+        System.out.print("\033[H\033[2J");  // Sogenannte ESCAPE-Sequenz!
+        System.out.flush();
     }
 
-    public static void zeigeKonten(List<Konto> kontenListe) {
+    public static void zeigeKonten(List<Konto> kontenListe) 
+    {
         System.out.println("+--------------------------+-------------+-----------------+");
         System.out.println("| Besitzer                 | Guthaben    | Ueberziehungsl. |");
         System.out.println("+--------------------------+-------------+-----------------+");
 
-        for (Konto konto : kontenListe) {
+        for (Konto konto : kontenListe)
+        {
             System.out.printf("| %-24s | %11.2f | %15.2f |\n", konto.getBesitzer(), konto.getGuthaben(), konto.getUeberziehungslimit());
         }
 
@@ -60,55 +57,68 @@ public class u28_v2 {
     }
 }
 
-class Konto {
-    private String sBesitzer; // owner
+class Konto
+{
+    private final String sBesitzer; // owner
     private double dGuthaben; // balance
-    private double dUeberziehungslimit; // overdrafts
+    private final double dUeberziehungslimit; // overdrafts
 
     // Konstruktoren
-    public Konto(String p_sBesitzer) {
+    public Konto(String p_sBesitzer)
+    {
         this.sBesitzer = p_sBesitzer;
         this.dGuthaben = 0.0;
         this.dUeberziehungslimit = 0.0;
     }
 
-    public Konto(String p_sBesitzer, double p_dAnfangsguthaben) {
+    public Konto(String p_sBesitzer, double p_dAnfangsguthaben)
+    {
         this.sBesitzer = p_sBesitzer;
         this.dGuthaben = p_dAnfangsguthaben;
         this.dUeberziehungslimit = 0.0;
     }
 
-    public Konto(String p_sBesitzer, double p_dAnfangsguthaben, double p_dUeberziehungslimit) {
+    public Konto(String p_sBesitzer, double p_dAnfangsguthaben, double p_dUeberziehungslimit)
+    {
         this.sBesitzer = p_sBesitzer;
         this.dGuthaben = p_dAnfangsguthaben;
         this.dUeberziehungslimit = p_dUeberziehungslimit;
     }
 
     // Methoden
-    public String getBesitzer() { // getOwner
+    public String getBesitzer() // getOwner
+    {
         return this.sBesitzer;
     }
 
-    public double getGuthaben() { // getBalance
+    public double getGuthaben() // getBalance
+    {
         return this.dGuthaben;
     }
 
-    public double getUeberziehungslimit() { // getOverdrafts
+    public double getUeberziehungslimit() // getOverdrafts
+    {
         return this.dUeberziehungslimit;
     }
 
-    public void einzahlen(double p_dBetrag) { // deposit
-        if (p_dBetrag > 0) {
+    public void einzahlen(double p_dBetrag) // deposit
+    {
+        if (p_dBetrag > 0)
+        {
             this.dGuthaben += p_dBetrag;
             System.out.println("Einzahlung von " + p_dBetrag + " auf Konto " + this.sBesitzer + ": Erfolgreich");
-        } else {
+        }
+        else
+        {
             System.out.println("Einzahlung von " + p_dBetrag + " auf Konto " + this.sBesitzer + ": Fehlgeschlagen");
         }
         System.out.println(); // Leerzeile
     }
 
-    public boolean abheben(double p_dBetrag) { // withdraw
-        if (p_dBetrag > 0 && this.dGuthaben + this.dUeberziehungslimit >= p_dBetrag) {
+    public boolean abheben(double p_dBetrag) // withdraw
+    {
+        if (p_dBetrag > 0 && this.dGuthaben + this.dUeberziehungslimit >= p_dBetrag)
+        {
             this.dGuthaben -= p_dBetrag;
             return true;
         }
