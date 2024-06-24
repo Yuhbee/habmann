@@ -1,4 +1,5 @@
 #include "SpielEingabe.h"
+#include <algorithm> // fuer std:find() (ub)
 
 Feld SpielEingabe::eingabeFeldKoordinaten()
     {
@@ -33,7 +34,7 @@ int SpielEingabe::eingabeInt(vector<int> gueltigeWerte)
     {
         int eingegebenerInt;
         cin >> eingegebenerInt;
-        if(!(find(gueltigeWerte.begin(), gueltigeWerte.end(), eingegebenerInt) != gueltigeWerte.end()))
+        if(!(std::find(gueltigeWerte.begin(), gueltigeWerte.end(), eingegebenerInt) != gueltigeWerte.end()))
             {
                 //Wenn der eingegebene Wert sich nicht unter den vorgegebenen befindet, wird der erste Wert der gueltigen Werte verwendet
                 eingegebenerInt = gueltigeWerte.at(0);
