@@ -1,6 +1,7 @@
 # Ignore executable files
 *.exe
 a.out
+*.out
 
 # Ignore macOS system files
 .DS_Store
@@ -16,4 +17,8 @@ node_modules/
 
 # Ignore visual studio code 
 .vscode
+
+# Ignore temp file from vim
+*.swp
+
 
