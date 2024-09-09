@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Altersberechnung</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="text"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        label[for="btnBerechnen"] {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Altersberechnung</h1>
+        
+        <!-- Eingabefeld für den Vornamen -->
+        <label for="txtVorname">Vorname:</label>
+        <input type="text" id="txtVorname" placeholder="Gib deinen Vornamen ein">
+
+        <!-- Eingabefeld für das Geburtsdatum -->
+        <label for="dateGeburtstag">Geburtsdatum:</label>
+        <input type="date" id="dateGeburtstag">
+
+        <!-- Bestätigungsbutton als Label implementiert -->
+        <label for="btnBerechnen" id="labelBerechnen">Alter berechnen</label>
+
+        <!-- Verstecktes Button-Element -->
+        <input type="button" id="btnBerechnen" style="display:none;" onclick="alterBerechnen()">
+
+        <!-- Bereich zur Ausgabe des Ergebnisses -->
+        <div class="result">
+            <p id="pErgebnisText"></p>
+            <p id="pErgebnisHtml"></p>
+        </div>
+    </div>
+
+    <script>
+        // Funktion zur Altersberechnung
+        function alterBerechnen() {
+            // Schritt 1: Vorname und Geburtsdatum erfassen
+            var strVorname = document.getElementById('txtVorname').value;
+            var strGeburtstag = document.getElementById('dateGeburtstag').value;
+
+            // Schritt 2: Überprüfen, ob beide Eingaben vorhanden sind
+            if (strVorname === '' || strGeburtstag === '') {
+                alert('Bitte Vorname und Geburtsdatum eingeben.');
+                return;
+            }
+
+            // Schritt 3: Geburtsdatum in ein Datum-Objekt umwandeln
+            var dateGeburtstag = new Date(strGeburtstag);
+
+            // Schritt 4: Heutiges Datum erfassen
+            let dateHeute = new Date();
+
+            // Schritt 5: Alter berechnen (Jahre)
+            let intAlter = dateHeute.getFullYear() - dateGeburtstag.getFullYear();
+            let intMonat = dateHeute.getMonth() - dateGeburtstag.getMonth();
+            let intTag = dateHeute.getDate() - dateGeburtstag.getDate();
+
+            // Wenn der Monat oder der Tag des aktuellen Jahres kleiner ist als der Geburtsmonat/-tag, das Alter um 1 Jahr reduzieren
+            if (intMonat < 0 || (intMonat === 0 && intTag < 0)) {
+                intAlter--;
+            }
+
+            // Schritt 6: Ausgabe des Ergebnisses mit innerText (nur Text, kein HTML)
+            document.getElementById('pErgebnisText').innerText = 'Hallo ' + strVorname + ', du bist ' + intAlter + ' Jahre alt.';
+
+            // Schritt 7: Unterschiedliche Ausgabe mit innerHTML (HTML-Struktur)
+            document.getElementById('pErgebnisHtml').innerHTML = '<strong>Hinweis:</strong> Dies ist eine <em>HTML-Ausgabe</em> mit formatierter Struktur!';
+        }
+
+        // Hinweis zu var und let:
+        // 'var' hat einen Funktionsscope, während 'let' einen Blockscope hat.
+        // Im Beispiel wird 'var' für die Vorname- und Geburtsdatums-Eingabe verwendet, da diese Werte über die gesamte Funktion zugänglich sein müssen.
+        // 'let' wird für die heutige Zeit und das Alter verwendet, da diese Werte nur innerhalb eines bestimmten Blocks benötigt werden.
+    </script>
+</body>
+</html>
